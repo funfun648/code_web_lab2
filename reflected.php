@@ -34,8 +34,50 @@ if (isset($_POST['submit'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
-    <link rel="stylesheet" href="reflected.css">
     <title>Input Page</title>
+    <style>
+      body{
+        background-image: url("/codePHP_vncert/imgs/xss.jpg");
+        background-repeat: no-repeat;
+        background-origin: border-box;
+        background-size: 1920px 1080px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        min-height: 80vh;
+        margin: 0;
+      }
+      input[type="text"] {
+    border-radius: 10px;
+    background-color: #fff;
+    color: #000;
+    padding: 10px 20px;
+    border: 1px solid #ccc;
+    font-size: 20px;
+  }
+  
+  button {
+    border-radius: 10px;
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    font-size: 20px;
+  }
+  button:hover {
+    background-color: #adb300;
+  }
+  #output {
+    margin-top: 10px; 
+    font-size: 15px;
+  }
+  h1, form, #output {
+    font-size: 30px;
+  text-align: center;
+}
+    </style>
 </head>
 <body>
     <h1>Nhập tên và nhấn nút để hiển thị</h1>
@@ -46,5 +88,25 @@ if (isset($_POST['submit'])) {
     <div id="output">
         <?php if (isset($escapedName)) echo $escapedName; ?>
     </div>
+    <div role="group" class="btn-group">
+    <strong>Hints<br></strong>
+    <button type="button" title="Hint 1" onclick='alert("ALERT(1) để xuất hiện một thứ gì đó ")'>1</button>
+    <button type="button" title="Hint 2" onclick='showHint2()'>2</button>
+    <button type="button" title="Hint 3" onclick='showHint3()'>3</button>
+</div>
+
+<script>
+    function showHint2() {
+        // Thay đổi nội dung trang web khi ấn nút 2
+        document.getElementById('hint-text').innerHTML = "tìm cách truy cập vào tài khoản manager nhé";
+    }
+    function showHint3() {
+        // Thay đổi nội dung trang web khi ấn nút 2
+        document.getElementById('hint-text').innerHTML = "mã hóa base64 để đăng nhập vào manager ";
+    }
+</script>
+
+<!-- Thêm một phần tử để hiển thị nội dung thay đổi -->
+<div id="hint-text" style="text-align: center; color: red;"></div>
 </body>
 </html>

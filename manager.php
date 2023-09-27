@@ -6,10 +6,13 @@ $search = ''; // Khởi tạo biến $search mặc định
 if (isset($_GET['search'])) {
     $search = $_GET['search'];
     $sql = "SELECT id, hoten, sdt, email, role FROM users WHERE hoten = '$search'";
-    $result = $conn->query($sql);
-
-    if ($result === false) {
-        echo  $conn->error;
+    try {
+        $result = $conn->query($sql);
+        if ($result === false) {
+            throw new Exception($conn->error);
+        }
+    } catch (Exception $e) {
+        echo $e->getMessage();
     }
 }
 ?>
@@ -28,7 +31,12 @@ if (isset($_GET['search'])) {
         }
 
         h1 {
-            color: white;
+            color: black;
+        }
+        p 
+        {
+            margin-top: 60px;
+            font-size: 20pt
         }
 
         form {
@@ -80,7 +88,7 @@ if (isset($_GET['search'])) {
     </form>
 
     <?php
-    if (isset($result) && $result->num_rows > 0) {
+    if (isset($result) && is_object($result)&& $result->num_rows > 0) {
         echo "<h2>Kết quả tìm kiếm:</h2>";
         echo "<table border='1'>";
         echo "<tr><th>ID</th><th>Họ Tên</th><th>Số Điện Thoại</th><th>Email</th><th>Vai Trò</th></tr>";
@@ -96,7 +104,11 @@ if (isset($_GET['search'])) {
         }
         echo "</table>";
     }
+    else
+    {
+        echo "<p>không tìm thấy !!!</p>";
+    }
     ?>
-
+<p>Hãy tìm cách để chiếm quyền điều khiển máy chủ ^^</p>
 </body>
 </html>

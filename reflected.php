@@ -20,8 +20,6 @@ function escape($s) {
 if (isset($_POST['submit'])) {
   $name = $_POST['name'];
   $escapedName = escape($name);
-
-  // Thực hiện kiểm tra nếu người dùng đã thực hiện cuộc tấn công XSS thành công
   if (strpos($escapedName, '&#97&#108&#101&#114&#116(1)') !== false) {
         echo "<script>alert('adminxsstosql');</script>";
   }
@@ -37,7 +35,7 @@ if (isset($_POST['submit'])) {
     <title>Input Page</title>
     <style>
       body{
-        background-image: url("/codePHP_vncert/imgs/xss.jpg");
+        background-image: url("../codePHP_vncert/imgs/anh-web.jpg");
         background-repeat: no-repeat;
         background-origin: border-box;
         background-size: 1920px 1080px;
@@ -54,7 +52,7 @@ if (isset($_POST['submit'])) {
     color: #000;
     padding: 10px 20px;
     border: 1px solid #ccc;
-    font-size: 20px;
+    font-size: 15px;
   }
   
   button {
@@ -64,7 +62,7 @@ if (isset($_POST['submit'])) {
     padding: 10px 20px;
     border: none;
     cursor: pointer;
-    font-size: 20px;
+    font-size: 15px;
   }
   button:hover {
     background-color: #adb300;
@@ -74,7 +72,7 @@ if (isset($_POST['submit'])) {
     font-size: 15px;
   }
   h1, form, #output {
-    font-size: 30px;
+    font-size: 20px;
   text-align: center;
 }
     </style>
@@ -97,16 +95,13 @@ if (isset($_POST['submit'])) {
 
 <script>
     function showHint2() {
-        // Thay đổi nội dung trang web khi ấn nút 2
         document.getElementById('hint-text').innerHTML = "tìm cách truy cập vào tài khoản manager nhé";
     }
     function showHint3() {
-        // Thay đổi nội dung trang web khi ấn nút 2
+
         document.getElementById('hint-text').innerHTML = "mã hóa base64 để đăng nhập vào manager ";
     }
 </script>
-
-<!-- Thêm một phần tử để hiển thị nội dung thay đổi -->
 <div id="hint-text" style="text-align: center; color: red;"></div>
 </body>
 </html>
